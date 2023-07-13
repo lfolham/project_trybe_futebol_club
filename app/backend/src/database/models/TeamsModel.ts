@@ -9,7 +9,7 @@ import db from '.';
 
 class SequelizeTeam extends Model<InferAttributes<SequelizeTeam>, InferCreationAttributes<SequelizeTeam>> {
     declare id: CreationOptional<number>;
-    declare teamName: string;
+    declare team_name: string;
 }
 
 SequelizeTeam.init(
@@ -20,7 +20,7 @@ SequelizeTeam.init(
       autoIncrement: true,
       allowNull: false,
     },
-    teamName: DataTypes.STRING,
+    team_name: DataTypes.STRING,
   },
   {
     tableName: 'teams',
