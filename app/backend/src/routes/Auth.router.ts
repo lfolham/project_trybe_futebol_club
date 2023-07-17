@@ -1,11 +1,18 @@
 import { Router } from 'express';
 import AuthController from '../controllers/AuthController';
 import Validations from '../middlewares/Validations';
+import UsersModel from '../models/UsersModel';
 
 const authRouter = Router();
 
-const authController = new AuthController();
+const userModel = new UsersModel();
+const authController = new AuthController(userModel);
 
-authRouter.post('/login', Validations.validateEmail, authController.login);
+authRouter.post(
+  '/login',
+  Validations.validateEmail,
+  Validations.validatePassword,
+  authController.login,
+);
 
 export default authRouter;
