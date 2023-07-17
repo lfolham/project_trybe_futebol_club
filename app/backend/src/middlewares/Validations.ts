@@ -7,7 +7,7 @@ class Validations {
 
     if (!Email.validate(email)) {
       return res.status(401).json({
-        message: 'invalid email or password',
+        message: 'All fields must be filled',
       });
     }
     next();
@@ -18,7 +18,7 @@ class Validations {
 
     if (password.length < 6) {
       return res.status(401).json({
-        message: 'Invalid email or password',
+        message: 'All fields must be filled',
       });
     }
     next();

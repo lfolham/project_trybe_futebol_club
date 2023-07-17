@@ -12,7 +12,7 @@ authRouter.post(
   '/login',
   Validations.validateEmail,
   Validations.validatePassword,
-  authController.login,
+  (req, res) => authController.login(req, res),
 );
 
 export default authRouter;

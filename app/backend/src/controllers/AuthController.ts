@@ -6,7 +6,6 @@ import JwtUtils from '../utils/jwtUtils';
 import UsersModel from '../models/UsersModel';
 
 export default class AuthController {
-  // eslint-disable-next-line class-methods-use-this
   private userModel: IUserModel = new UsersModel();
   private jwtUtils = new JwtUtils();
 
@@ -20,7 +19,7 @@ export default class AuthController {
 
     if (!user) {
       return res.status(401).json({
-        message: 'Invalid email or password',
+        message: 'All fields must be filled',
       });
     }
 
