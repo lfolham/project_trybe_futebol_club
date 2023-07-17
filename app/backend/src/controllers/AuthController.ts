@@ -19,7 +19,7 @@ export default class AuthController {
 
     if (!user) {
       return res.status(401).json({
-        message: 'All fields must be filled',
+        message: 'Invalid email or password',
       });
     }
 

@@ -9,7 +9,7 @@ const userModel = new UsersModel();
 const authController = new AuthController(userModel);
 
 authRouter.post(
-  '/login',
+  '/',
   Validations.validateEmail,
   Validations.validatePassword,
   (req, res) => authController.login(req, res),

@@ -5,6 +5,6 @@ import authRouter from './Auth.router';
 const router = Router();
 
 router.use('/teams', teamRouter);
-router.use(authRouter);
+router.use('/login', authRouter);
 
 export default router;

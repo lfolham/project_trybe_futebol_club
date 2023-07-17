@@ -5,7 +5,7 @@ class Validations {
   static validateEmail(req: Request, res: Response, next: NextFunction) : Response | void {
     const { email } = req.body as { email: string, password: string };
 
-    if (!Email.validate(email)) {
+    if (!Email.validateEmail(email)) {
       return res.status(401).json({
         message: 'All fields must be filled',
       });
