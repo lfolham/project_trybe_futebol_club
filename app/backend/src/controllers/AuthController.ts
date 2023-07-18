@@ -41,7 +41,7 @@ export default class AuthController {
   }
 
   public async getById(req: Request, res: Response) {
-    const { id } = req.params;
+    const { id } = res.locals.decoded;
     const serviceResponse = await this.userService.getById(Number(id));
 
     if (serviceResponse.status !== 'SUCCESSFUL') {

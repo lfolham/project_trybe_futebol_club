@@ -17,6 +17,6 @@ authRouter.post(
 authRouter.get(
   '/role',
   Validations.validateToken,
-  (req, res) => authController.login(req, res),
+  (req, res) => authController.getById(req, res),
 );
 export default authRouter;

@@ -32,12 +32,14 @@ class Validations {
         message: 'Token not found',
       });
     }
+
     const data = authorization.split(' ');
-    const jwtUtils = new JwtUtils();
-    const tokenDecoded = jwtUtils.verify(data[1]);
 
     try {
-      res.locals.tokenDecoded = tokenDecoded;
+      const jwtUtils = new JwtUtils();
+      const decoded = jwtUtils.verify(data[1]);
+
+      res.locals.decoded = decoded;
 
       next();
     } catch (exception) {
@@ -45,7 +47,6 @@ class Validations {
         message: 'Token must be a valid token',
       });
     }
-    next();
   }
 }
 
