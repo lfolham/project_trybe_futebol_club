@@ -1,7 +1,7 @@
 export default class Email {
-  private static emailRegex = /^\w+(\[\+\.-\]?\w)*@\w+(\[\.-\]?\w+)*\.[a-z]+$/i;
+  private static emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  static validateEmail(email: string) : boolean {
-    return Email.emailRegex.test(email);
+  public static isValidEmail(email: string): boolean {
+    return this.emailRegex.test(email);
   }
 }
