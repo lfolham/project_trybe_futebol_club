@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import JwtUtils from '../utils/jwtUtils';
 import Email from '../validations/Email';
 import { IUser } from '../Interfaces/Users/IUser';
 
@@ -21,6 +22,30 @@ class Validations {
     }
 
     return next();
+  }
+
+  static validateToken(req: Request, res: Response, next: NextFunction): Response | void {
+    const { authorization } = req.headers;
+
+    if (!authorization) {
+      return res.status(401).json({
+        message: 'Token not found',
+      });
+    }
+    const data = authorization.split(' ');
+    const jwtUtils = new JwtUtils();
+    const tokenDecoded = jwtUtils.verify(data[1]);
+
+    try {
+      res.locals.tokenDecoded = tokenDecoded;
+
+      next();
+    } catch {
+      return res.status(401).json({
+        message: 'Token must be a valid token',
+      });
+    }
+    next();
   }
 }
 
