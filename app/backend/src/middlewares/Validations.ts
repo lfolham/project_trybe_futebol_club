@@ -40,7 +40,7 @@ class Validations {
       res.locals.tokenDecoded = tokenDecoded;
 
       next();
-    } catch {
+    } catch (exception) {
       return res.status(401).json({
         message: 'Token must be a valid token',
       });
