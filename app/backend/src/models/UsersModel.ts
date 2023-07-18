@@ -9,4 +9,10 @@ export default class UsersModel implements IUserModel {
     const dbData = await this.model.findOne({ where: { email } });
     return !dbData ? null : dbData;
   }
+
+  async getById(id: IUser['id']): Promise<IUser | null> {
+    const dbData = await this.model.findByPk(id);
+    if (!dbData) return null;
+    return dbData;
+  }
 }
