@@ -8,12 +8,15 @@ const authRouter = Router();
 const userModel = new UsersModel();
 const authController = new AuthController(userModel);
 
-authRouter.get('/role', (req, res) => authController.login(req, res));
-
 authRouter.post(
   '/',
   Validations.validateLogin,
   (req, res) => authController.login(req, res),
 );
 
+authRouter.get(
+  '/role',
+  Validations.validateToken,
+  (req, res) => authController.login(req, res),
+);
 export default authRouter;
