@@ -13,6 +13,10 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Teams test', () => {
+   afterEach(() => {
+        sinon.restore();
+    });
+
   it('GET/teams find all - successfull', async function() {
     sinon.stub(Team, 'findAll').resolves(allTeams as any);
 
@@ -45,7 +49,4 @@ describe('Teams test', () => {
     expect(status).to.equal(404);
     expect(body.message).to.equal('Team 1 not found');
   });
-
-
-  afterEach(sinon.restore);
 });
