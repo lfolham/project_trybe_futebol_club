@@ -24,8 +24,7 @@ export default class MatchesController {
 
   public async endMatch(req: Request, res: Response): Promise<Response> {
     const id = Number(req.params.id);
-    const match = req.body;
-    const serviceResponse = await this.matchesService.endMatch(id, match);
+    const serviceResponse = await this.matchesService.endMatch(id);
 
     if (serviceResponse.status !== 'SUCCESSFUL') {
       return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
