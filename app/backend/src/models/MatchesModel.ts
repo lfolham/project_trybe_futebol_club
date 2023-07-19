@@ -2,6 +2,7 @@ import SequelizeTeam from '../database/models/TeamsModel';
 import { IMatchesModel } from '../Interfaces/Matches/IMatchesModel';
 import SequelizeMatches from '../database/models/MatchesModel';
 import { IMatches } from '../Interfaces/Matches/IMatches';
+import { NewEntity } from '../Interfaces';
 
 export default class MatchesModel implements IMatchesModel {
   private model = SequelizeMatches;
@@ -38,5 +39,12 @@ export default class MatchesModel implements IMatchesModel {
     return dbData.map((matches) => (
       matches
     ));
+  }
+
+  async endMatche(id:IMatches['id'], data: Partial<NewEntity<IMatches>>): Promise<IMatches | null> {
+    const [affectedRows] = await this.model.update(data, { where: { id } });
+    if (affectedRows === 0) return null;
+
+    return this.findById(id);
   }
 }
