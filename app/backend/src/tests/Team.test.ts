@@ -13,31 +13,37 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Teams test', () => {
-  it('GET/teams funcionando corretamente', async function() {
+  it('GET/teams find all - successfull', async function() {
     sinon.stub(Team, 'findAll').resolves(allTeams as any);
 
-    const { status, body } = await chai.request(app).get('/teams');
+    const { status, body } = await chai
+    .request(app)
+    .get('/teams');
 
     expect(status).to.equal(200);
     expect(body).to.deep.equal(allTeams);
   });
 
-  it('GET/teams/1 funcionando corretamente', async function() {
+  it('GET/teams/1 find bu id - successfull', async function() {
     sinon.stub(Team, 'findByPk').resolves(singleTeam as any);
 
-    const { status, body } = await chai.request(app).get('/teams/1');
+    const { status, body } = await chai
+    .request(app)
+    .get('/teams/1');
 
     expect(status).to.equal(200);
     expect(body).to.deep.equal(singleTeam);
   });
 
-  it('Quando não encontrar os valores esperados', async function() {
-    sinon.stub(Team, 'findByPk').resolves(null);
+  it('failure - wrong return', async function() {
+    sinon.stub(Team, 'findOne').resolves(null);
 
-    const { status, body } = await chai.request(app).get('/teams/1');
+    const { status, body } = await chai
+    .request(app)
+    .get('/teams/1');
 
     expect(status).to.equal(404);
-    expect(body.message).to.equal('Team not found');
+    expect(body.message).to.equal('Team 1 not found');
   });
 
 
