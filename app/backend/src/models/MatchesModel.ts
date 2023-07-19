@@ -27,9 +27,9 @@ export default class MatchesModel implements IMatchesModel {
     return { id, homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress };
   }
 
-  async matchesInProgress(key: string, query: string | boolean): Promise<IMatches[]> {
+  async matchesInProgress(inProgress: boolean): Promise<IMatches[]> {
     const dbData = await this.model.findAll({
-      where: { [key]: query },
+      where: { inProgress },
       include: [
         { model: SequelizeTeam, as: 'homeTeam', attributes: { exclude: ['id'] } },
         { model: SequelizeTeam, as: 'awayTeam', attributes: { exclude: ['id'] } },
