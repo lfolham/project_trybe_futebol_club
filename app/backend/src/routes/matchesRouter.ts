@@ -23,7 +23,7 @@ router.patch(
 router.post(
   '/',
   Validations.validateToken,
-  (req: Request, res: Response) => matchesController.createMath(req, res),
+  (req: Request, res: Response) => matchesController.createMatch(req, res),
 );
 
 export default router;

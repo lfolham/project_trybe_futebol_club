@@ -49,8 +49,14 @@ export default class MatchesService {
     return { status: 'SUCCESSFUL', data: { message: 'Finished' } };
   }
 
-  public async createMath(match: NewEntity<IMatches>): Promise<ServiceResponse<IMatches>> {
-    const newMatch = await this.matchesModel.createMatch(match);
+  public async createMatch(data: NewEntity<IMatches>): Promise<ServiceResponse<IMatches>> {
+    // valeu Renato Filho!
+    const newData: NewEntity<IMatches> = {
+      ...data,
+      inProgress: true,
+    };
+
+    const newMatch: IMatches = await this.matchesModel.createMatch(newData);
     return { status: 'SUCCESSFUL', data: newMatch };
   }
 }
