@@ -20,15 +20,7 @@ export default class MatchesModel implements IMatchesModel {
     ));
   }
 
-  async findById(id: IMatches['id']): Promise<IMatches | null> {
-    const dbData = await this.model.findByPk(id);
-    if (dbData == null) return null;
-
-    const { homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress }: IMatches = dbData;
-    return { id, homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress };
-  }
-
-  async matchesInProgress(inProgress: boolean): Promise<IMatches[]> {
+  async findByQuery(inProgress: boolean): Promise<IMatches[]> {
     const dbData = await this.model.findAll({
       where: { inProgress },
       include: [
@@ -39,6 +31,14 @@ export default class MatchesModel implements IMatchesModel {
     return dbData.map((matches) => (
       matches
     ));
+  }
+
+  async findById(id: IMatches['id']): Promise<IMatches | null> {
+    const dbData = await this.model.findByPk(id);
+    if (dbData == null) return null;
+
+    const { homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress }: IMatches = dbData;
+    return { id, homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress };
   }
 
   async endMatche(id:IMatches['id'], data: Partial<NewEntity<IMatches>>): Promise<IMatches | null> {
