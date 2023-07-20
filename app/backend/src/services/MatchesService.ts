@@ -1,3 +1,4 @@
+import { NewEntity } from '../Interfaces';
 import MatchesModel from '../models/MatchesModel';
 import { IMatches } from '../Interfaces/Matches/IMatches';
 import { IMatchesModel } from '../Interfaces/Matches/IMatchesModel';
@@ -46,5 +47,10 @@ export default class MatchesService {
         data: { message: `There are no updates to perform in Match ${id}` } };
     }
     return { status: 'SUCCESSFUL', data: { message: 'Finished' } };
+  }
+
+  public async createMath(match: NewEntity<IMatches>): Promise<ServiceResponse<IMatches>> {
+    const newMatch = await this.matchesModel.createMatch(match);
+    return { status: 'SUCCESSFUL', data: newMatch };
   }
 }
