@@ -6,4 +6,5 @@ export interface IMatchesModel {
   findByQuery(inProgress: IMatches['inProgress']): Promise<IMatches[]>;
   findById(id: IMatches['id']): Promise<IMatches | null>
   endMatche(id: IMatches['id'], data: Partial<NewEntity<IMatches>>): Promise<IMatches | null>
+  createMatch(data: Partial<IMatches>):Promise<IMatches>
 }

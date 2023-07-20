@@ -47,4 +47,12 @@ export default class MatchesModel implements IMatchesModel {
 
     return this.findById(id);
   }
+
+  async createMatch(data: NewEntity<IMatches>): Promise<IMatches> {
+    const dbData = await this.model.create(data);
+
+    const { id, homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress }
+    : IMatches = dbData;
+    return { id, homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress };
+  }
 }
