@@ -1,4 +1,4 @@
-export interface ILeaderBoard {
+export interface TeamDetails {
   name: string,
   totalPoints: number,
   totalGames: number,
@@ -8,5 +8,5 @@ export interface ILeaderBoard {
   goalsFavor: number,
   goalsOwn: number,
   goalsBalance: number,
-  efficiency: number,
+  efficiency: string,
 }
